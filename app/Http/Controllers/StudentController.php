@@ -16,11 +16,15 @@ class StudentController extends Controller
     ];
 
     function index(){
+        // seprate logic from presentation
          // I want to replace this  page with html page ?
-        return $this->students;
+        // return $this->students;
+        # you can send parameters to the view
+        return view('student.index', ["students"=> $this->students]);
     }
     function create(){
-        return "create student";
+        // return "create student";
+        return view("student.create");
     }
 
     function show($id){
