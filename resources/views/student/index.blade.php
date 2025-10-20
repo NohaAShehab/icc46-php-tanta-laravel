@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-gray-50 text-gray-900">
-    <header class="border-b bg-white">
-        <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between">
-            <h1 class="text-2xl font-bold tracking-tight">Students</h1>
-            <a href="{{ url('/students/create') }}" class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Create Student</a>
-        </div>
-    </header>
 
-    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div class="mb-6 flex items-center justify-between gap-4">
+
+@extends('layouts.app')
+
+@section('main')
+<div class="mb-6 flex items-center justify-between gap-4">
             <p class="text-sm text-gray-600">Showing {{ count($students ?? []) }} students</p>
             <div class="relative w-full max-w-xs">
                 <input type="text" placeholder="Search by name..." class="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" oninput="filterCards(this.value)">
@@ -25,10 +13,7 @@
 
         <div id="students-grid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             
-<!--        
-        @foreach ($students as $student)
-            <li> {{$student['name']}} </li>
-        @endforeach -->
+
 
         @foreach(($students ?? []) as $student)
                 <div class="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md" data-name="{{ strtolower($student['name']) }}">
@@ -59,20 +44,8 @@
             @endforeach
 
         </div>
-    </main>
+ @endsection
 
-    <script>
-        function filterCards(query) {
-            const q = (query || '').toLowerCase().trim();
-            const grid = document.getElementById('students-grid');
-            const cards = grid.querySelectorAll('[data-name]');
-            cards.forEach(card => {
-                const name = card.getAttribute('data-name') || '';
-                card.style.display = name.includes(q) ? '' : 'none';
-            });
-        }
-    </script>
-</body>
-</html>
+
 
 
