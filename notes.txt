@@ -19,3 +19,10 @@ ITI
 
 ->resources
 -> -> views(frontend pages I need)
+
+
+
+Routing
+https://laravel.com/docs/12.x/routing
+
+----------------

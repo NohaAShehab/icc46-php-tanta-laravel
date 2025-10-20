@@ -66,8 +66,19 @@ Route::get("num/{num}", function($num){
 // I need to call the printVariable function from the ITIController class
 use App\Http\Controllers\ITIController;
 
-Route::get("/{var}", [ITIController::class, 'printVariable']);
+// Route::get("/{var}", [ITIController::class, 'printVariable']);
 # scope binding  ==> I need printvariable function 
 
 
 Route::get("/test/test", [ITIController::class, "getTest"]);
+
+//
+
+// create 3 pages index, create student, show student ?
+// create controller --> group functions students 
+// php artisan make:controller StudentController 
+
+use App\Http\Controllers\StudentController;
+Route::get("/students", [StudentController::class, "index"]);
+Route::get("/students/create", [StudentController::class, "create"]);
+Route::get("/students/{id}", [StudentController::class, "show"])->where("id", "[0-9]+");
