@@ -1,0 +1,21 @@
+how to create project 
+1- composer create-project laravel/laravel blog (install laravel , required packages needed by the project)
+once you run command 
+php artisan serve ??
+start dev server--> on localhost --> port 8000 
+
+you can change port ?? php artisan server --port=9000 ??
+
+
+project tree ?
+
+
+ITI
+-> app
+-> -> http
+-> -> -> controller (brain)
+-> -> models (db)
+
+
+->resources
+-> -> views(frontend pages I need)
