@@ -20,11 +20,11 @@ class StudentController extends Controller
          // I want to replace this  page with html page ?
         // return $this->students;
         # you can send parameters to the view
-        return view('student.index', ["students"=> $this->students]);
+        return view('students.index', ["students"=> $this->students]);
     }
     function create(){
         // return "create student";
-        return view("student.create");
+        return view("students.create");
     }
 
     function show($id){
