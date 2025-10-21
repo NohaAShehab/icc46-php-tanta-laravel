@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Student;
+
 
 class StudentController extends Controller
 {
@@ -16,11 +19,18 @@ class StudentController extends Controller
     ];
 
     function index(){
-        // seprate logic from presentation
-         // I want to replace this  page with html page ?
-        // return $this->students;
-        # you can send parameters to the view
-        return view('students.index', ["students"=> $this->students]);
+        /**
+         * using query builder return array of objects --> so you need to changes views to deal with student
+         * as object not an array
+         * $students = DB::table('students')->get();  # return with array of std objects
+        */
+
+        // method2 --> get data using Model ??
+        $students = Student::all(); # select * from students;
+        # views can deal with model object either as an array or object ?
+//        dd($students); # array of objects  from type StudentModel  -->
+        # get data from db ?
+        return view('students.index', ["students"=> $students]);
     }
     function create(){
         // return "create student";
@@ -28,14 +38,15 @@ class StudentController extends Controller
     }
 
     function show($id){
-        // return $this->students[$id];
-       $res =  array_filter($this->students, function($student) use($id){
-            return $student["id"] == $id;
-        });
-        dd($res);
-        if ($res){
-            return array_values($res)[0];
-        }
-        return abort(404);
+        $student = Student::findOrFail($id);
+        return view('students.show', ['student' => $student]);
+    }
+
+    // delete object --> get object orm will do the task ?
+    function destroy($id){
+//        dd($id);
+        $student = Student::findOrFail($id);
+        $student->delete();
+        return to_route('students.index');
     }
 }

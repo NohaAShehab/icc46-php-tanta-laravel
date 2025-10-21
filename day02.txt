@@ -54,3 +54,22 @@ default of columns in not null unless you specify this.
 # changes on column ??
 create migration file --> make email unique ?
 php artisan make:migration alter_students_table --table=students
+
+# query data from db >
+option01: use query builder
+use Illuminate\Support\Facades\DB;
+
+option02: use orm --> object relational mapper
+each table in db is represented by Model class ?
+
+table name --> students, ==> model class Student?
+I need you use model ??
+php artisan make:model Student
+https://laravel.com/docs/12.x/eloquent
+
+
+----> html forms => allow only methods --> get, post ??
+when write delete ===> get method
+
+
+https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/CSRF
