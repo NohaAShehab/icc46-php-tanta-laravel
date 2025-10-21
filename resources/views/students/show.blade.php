@@ -174,6 +174,9 @@
     </div>
 
     <div class="text-sm text-gray-500">
+        Created at: {{ $student->created_at ? $student->created_at->format('M d, Y \a\t g:i A') : ''}}
+    </div>
+        <div class="text-sm text-gray-500">
         Last updated: {{ $student->updated_at ? $student->updated_at->format('M d, Y \a\t g:i A') : ''}}
     </div>
 </div>

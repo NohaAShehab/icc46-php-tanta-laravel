@@ -93,3 +93,5 @@ Route::get("/students/{id}", [StudentController::class, "show"])
 Route::delete('/students/{id}', [StudentController::class, "destroy"])->whereNumber("id")
     ->name("students.destroy");
 
+# save new data to the server ?? create new object
+Route::post("/students", [StudentController::class, "store"])->name('students.store');
