@@ -19,6 +19,36 @@ api =-> must return with validation error message
 I can summarize the controller , routes ---> for our application
 
 Resource controller --->
+-------------------------------------------------
+Crud operations courses -->
+model , migration file, controller, views , routes
+
+course : name, image, price, description
+php artisan make:migration create_courses_table
+php artisan make:model Course
+php artisan make:controller CourseController
+
+php artisan make:model Course -m -r -c
+
+--> The objective of using controller  --> manage operations --> applied on course ?
+show, edit, create, index, destroy, store, update functions inside the controller
+use model of Course ?
+└─(14:33:50 on main ✹ ✭)──> php artisan make:controller CourseController    --model=Course                                                 ──(Wed,Oct22)─┘
+
+
+////
+  GET|HEAD        courses ............................... courses.index › CourseController@index
+  POST            courses ................... .......... courses.store › CourseController@store
+  GET|HEAD        courses/create ................................ courses.create › CourseController@create
+  GET|HEAD        courses/{course} ................................ courses.show › CourseController@show
+  PUT|PATCH       courses/{course} .............................. courses.update › CourseController@update
+  DELETE          courses/{course} ............................ courses.destroy › CourseController@destroy
+  GET|HEAD        courses/{course}/edit ................................ courses.edit › CourseController@edit
+
+
+
+
+
 
 
 

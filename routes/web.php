@@ -95,3 +95,30 @@ Route::delete('/students/{id}', [StudentController::class, "destroy"])->whereNum
 
 # save new data to the server ?? create new object
 Route::post("/students", [StudentController::class, "store"])->name('students.store');
+
+
+
+/// if you are using resource controller , you can generate all the required routes
+/// in one line ?
+///
+use App\Http\Controllers\CourseController;
+Route::resource("/courses", CourseController::class);
+# generate routes for the controller functions ??
+//php artisan route:list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

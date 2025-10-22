@@ -1,0 +1,109 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Course;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class CourseController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+        $courses = Course::all();
+        return view("courses.index", compact("courses"));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+        return view("courses.create");
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+
+        $request->validate([
+            "name" => "required|unique:courses",
+            "description" => "min:3"
+        ]);
+//        dd($request->all());
+        $request_data = $request->all();
+//        unset($request_data["_token"]);
+//        dd($request_data);
+        // model provide function create object in one line ??
+        # mass assignment --> instead of sending data element by element -->
+        # you send it as mass
+        $request_data['image']= $this->uploadImage($request);
+        $course = Course::create($request_data);
+        # the only issue is uploading image ??
+
+        return to_route("courses.show", $course->id);
+    }
+
+    /**
+     * Display the specified resource.
+     * Get object associated with id
+     */
+    public function show(Course $course)
+    {
+        return view("courses.show", ["course"=>$course]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Course $course)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Course $course)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Course $course)
+    {
+        // delete image
+        if ($course-> image){
+            $this->deleteImage($course->image);
+        }
+        $course->delete();
+        return to_route('courses.index');
+    }
+
+    private function uploadImage($request){
+        if($request->hasFile("image")){
+            $image = $request->file("image");
+            $extension = $image->getClientOriginalExtension();
+            $imageName = time() . '.' . $extension;
+            $image->storeAs("courses", $imageName, 'coursesImages');
+            return "courses/{$imageName}";
+
+        }
+        return null;
+    }
+
+    private function deleteImage($imageName){
+        Storage::disk('public')-> delete($imageName);
+    }
+}
