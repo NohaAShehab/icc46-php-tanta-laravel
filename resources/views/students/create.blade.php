@@ -19,12 +19,22 @@
     </div>
 </div>
 
+{{--@if ($errors->any())--}}
+{{--    <div class="alert alert-danger">--}}
+{{--        <ul>--}}
+{{--            @foreach ($errors->all() as $error)--}}
+{{--                <li>{{ $error }}</li>--}}
+{{--            @endforeach--}}
+{{--        </ul>--}}
+{{--    </div>--}}
+{{--@endif--}}
 <!-- Student Form -->
 <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
     <div class="px-6 py-4 border-b border-gray-200">
         <h3 class="text-lg font-medium text-gray-900">Student Information</h3>
         <p class="mt-1 text-sm text-gray-500">Fill in the details below to create a new student record.</p>
     </div>
+
 
     <form action="{{route('students.store')}}" method="POST" class="px-6 py-6"  enctype="multipart/form-data">
         @csrf
@@ -112,10 +122,7 @@
                     type="number"
                     name="grade"
                     id="grade"
-                    value="{{ old('grade') }}"
                     step="0.1"
-                    min="0"
-                    max="100"
                     class="block w-full px-3 py-2 border border-gray-300 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 @error('grade') border-red-300 @enderror"
                     placeholder="0.0"
                 >

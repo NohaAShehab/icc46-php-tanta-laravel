@@ -1,0 +1,27 @@
+we need to validate request against >
+
+duplication of email , max grade
+https://laravel.com/docs/12.x/validation#available-validation-rules
+
+when ask the request to validate the inputs
+--> share errors via sessions ??
+--> to display errors
+use $error or @error directive
+https://laravel.com/docs/12.x/validation#the-at-error-directive
+display errors in views
+
+--------------------------------------------------------------
+
+web application ==> validate data front, back , db ??
+
+api =-> must return with validation error message
+=========================================================================
+I can summarize the controller , routes ---> for our application
+
+Resource controller --->
+
+
+
+
+
+

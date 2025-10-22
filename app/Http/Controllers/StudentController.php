@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
-
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -44,16 +44,36 @@ class StudentController extends Controller
 
     // delete object --> get object orm will do the task ?
     function destroy($id){
-//        dd($id);
         $student = Student::findOrFail($id);
+
+        if ($student-> image){
+            $this->deleteImage($student->image);
+        }
         $student->delete();
         return to_route('students.index');
     }
 
     function store(){
-        $request_data= request();  # prepare data to the db >> trim extra spaces, convert empty string to null
-        // you access the body of the request >? via calling request
 
+        // before you store object we need to validate data ???
+
+        $request_data= request();  # prepare data to the db >> trim extra spaces, convert empty string to null
+       // you can validate request data before completeting to the next step ?
+        request()->validate(
+            // rules
+            [
+            "name"=>"min:2|max:10",
+            "email"=>"email|unique:students",
+            "grade"=>"max:100"
+        ],
+            // customize error message ?
+            [
+            "name.min"=> "Student name must be at least 2 chars",
+                "email.unique"=> "Student with this email already exist",
+        ]);
+
+
+        // you access the body of the request >? via calling request
         $name = request('name');
         $date_of_birth = request('date_of_birth');
         $email = request('email');
@@ -93,5 +113,9 @@ class StudentController extends Controller
         $imageObject->
         storeAs('students', $image_name, 'public');
         return "students/{$image_name}";
+    }
+
+    private function deleteImage($imageName){
+        Storage::disk('public')-> delete($imageName);
     }
 }
