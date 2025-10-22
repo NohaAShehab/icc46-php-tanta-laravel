@@ -175,4 +175,22 @@ public function courses()
 
 ---
 
+## 📚 **Documentation Resources**
+
+### **Laravel Official Documentation**
+- [Resource Controllers](https://laravel.com/docs/12.x/controllers#resource-controllers)
+- [Route Model Binding](https://laravel.com/docs/12.x/routing#route-model-binding)
+- [File Storage](https://laravel.com/docs/12.x/filesystem)
+- [Database Migrations](https://laravel.com/docs/12.x/migrations)
+- [Eloquent Relationships](https://laravel.com/docs/12.x/eloquent-relationships)
+- [Form Request Validation](https://laravel.com/docs/12.x/validation#form-request-validation)
+- [Named Routes](https://laravel.com/docs/12.x/routing#named-routes)
+
+### **Additional Resources**
+- [Laravel Best Practices](https://github.com/alexeymezenin/laravel-best-practices)
+- [Eloquent ORM](https://laravel.com/docs/12.x/eloquent)
+- [Blade Templates](https://laravel.com/docs/12.x/blade)
+
+---
+
 *This lecture focused on implementing backend functionality with resource controllers, file storage, and URL naming for maintainable Laravel applications.*
