@@ -163,6 +163,28 @@
             </div>
         </div>
 
+        <div class="mt-6">
+            <label for="course_id" class="block text-sm font-medium text-gray-700 mb-2">
+                Course
+            </label>
+            <div class="flex items-center space-x-4">
+                <select
+                    name="course_id"
+                    id="course_id"
+                    class="block w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 @error('gender') border-red-300 @enderror"
+                >
+                    <option value="">Select Course</option>
+                    @foreach($courses as $course)
+                        <option value="{{$course->id}}"> {{$course->name}}</option>
+                    @endforeach
+                </select>
+                @error('course_id')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+        </div>
+
         <!-- Form Actions -->
         <div class="mt-8 flex items-center justify-end space-x-4">
             <a href="{{ url('/students') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">

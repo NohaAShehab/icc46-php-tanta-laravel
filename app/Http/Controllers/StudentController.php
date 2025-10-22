@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -34,12 +35,16 @@ class StudentController extends Controller
     }
     function create(){
         // return "create student";
-        return view("students.create");
+        $courses = Course::all();
+        return view("students.create", ["courses"=>$courses]);
     }
 
     function show($id){
         $student = Student::findOrFail($id);
-        return view('students.show', ['student' => $student]);
+        /// get course name -->and send it to the view ??
+        $course=  Course::find($student->course_id);
+
+        return view('students.show', ['student' => $student, 'course'=>$course]);
     }
 
     // delete object --> get object orm will do the task ?
@@ -55,10 +60,6 @@ class StudentController extends Controller
 
     function store(){
 
-        // before you store object we need to validate data ???
-
-        $request_data= request();  # prepare data to the db >> trim extra spaces, convert empty string to null
-       // you can validate request data before completeting to the next step ?
         request()->validate(
             // rules
             [
@@ -80,6 +81,7 @@ class StudentController extends Controller
         $grade = request('grade');
         $gender = request('gender');
 
+
         // save image in server --> external storage
         // I need to check if image is uploaded or not ??
         ## $_FILES
@@ -98,6 +100,7 @@ class StudentController extends Controller
         $student->date_of_birth = $date_of_birth;
         $student->grade = $grade;
         $student->gender = $gender;
+        $student->course_id = request('course_id');
         # save object to the db ?
         $student->save();
 //        return to_route('students.index');

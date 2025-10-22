@@ -11,5 +11,11 @@ class Course extends Model
     # Add [name] to fillable property to allow mass assignment on [App\Models\Course].
     protected $fillable = ["name", "price", "description", "image"];
 
+    # define the relation in Courses ?
+    # this course has many students ?
+    function students(){
+        return $this->hasMany(Student::class);
+    }
+
 
 }

@@ -47,7 +47,24 @@ use model of Course ?
 
 
 
+///////////////////
 
+
+relationship ??
+one to one,
+one to many  (( one student study one course , course is studied by many students ))
+many to many
+
+------------------------------------------------------
+
+define relation --> on db level ?migration file ==> add fk ??
+php artisan make:migration add_course_id_to_students_table
+---> on model level ?
+
+
+# I need to tell the student model that you have a relation with course model
+--> we need to define this in the student model
+https://laravel.com/docs/12.x/eloquent-relationships#one-to-many
 
 
 

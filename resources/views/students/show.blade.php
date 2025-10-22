@@ -139,8 +139,15 @@
                     <dd class="mt-1 text-sm text-gray-900">{{ $student->email ?? 'Not provided' }}</dd>
                 </div>
                 <div>
-                    <dt class="text-sm font-medium text-gray-500">Phone</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{{ $student->phone ?? 'Not provided' }}</dd>
+{{--                    @dump($student->course_id, $student->course)--}}
+                    <dt class="text-sm font-medium text-gray-500">Course</dt>
+
+                        @if($student->course)
+                        <dd class="mt-1 text-sm "><a href="{{route('courses.show', $student->course_id)}}"> {{$student->course->name}}</a></dd>
+                        @else
+                        <dd class="mt-1 text-sm text-gray-900"> No course yet</dd>
+                        @endif
+
                 </div>
                 <div>
                     <dt class="text-sm font-medium text-gray-500">Address</dt>
