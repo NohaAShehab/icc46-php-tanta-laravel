@@ -52,27 +52,29 @@ class StudentController extends Controller
 
     function store(){
         $request_data= request();  # prepare data to the db >> trim extra spaces, convert empty string to null
-        dd($_POST, $request_data); // here we use php code
         // you access the body of the request >? via calling request
 
         $name = request('name');
         $date_of_birth = request('date_of_birth');
         $email = request('email');
         $grade = request('grade');
-        $image = request('image');
         $gender = request('gender');
 
         // save image in server --> external storage
         // I need to check if image is uploaded or not ??
         ## $_FILES
         $image=  request('image');
-//        dd($image);
+        $image_name = null;
+        if($image){
+            $image_name=$this->uploadImage($image);
+        }
+
         # create new object form model --> can be used to save new record in db ?
 
         $student = new Student();
         $student->name = $name;
         $student->email = $email;
-        $student->image = $image;
+        $student->image = $image_name;
         $student->date_of_birth = $date_of_birth;
         $student->grade = $grade;
         $student->gender = $gender;
@@ -82,5 +84,14 @@ class StudentController extends Controller
         return to_route("students.show", $student->id);
 
 
+    }
+
+    // we need create link for storage
+    // php artisan storage:link
+    private  function uploadImage( $imageObject){
+        $image_name= now()->format('Ymd_His') . '.' . $imageObject->getClientOriginalExtension();
+        $imageObject->
+        storeAs('students', $image_name, 'public');
+        return "students/{$image_name}";
     }
 }

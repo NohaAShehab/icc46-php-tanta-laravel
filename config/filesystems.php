@@ -46,6 +46,17 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        'studentsImages' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/students'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+
+        // create myown filesystem symbol
 
         's3' => [
             'driver' => 's3',

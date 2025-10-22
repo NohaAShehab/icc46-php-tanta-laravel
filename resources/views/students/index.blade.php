@@ -45,7 +45,7 @@
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                         <img
-                            src="{{ asset('images/' . $student['image']) }}"
+                            src="{{ Storage::url($student->image)}}"
                             alt="{{ $student['name'] }}"
                             class="w-12 h-12 rounded-full object-cover"
                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&crop=face';"

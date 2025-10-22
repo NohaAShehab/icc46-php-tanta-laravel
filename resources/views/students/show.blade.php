@@ -20,7 +20,7 @@
             <!-- Student Avatar -->
             <div class="flex-shrink-0">
                 <img
-                    src="{{ asset('images/' . $student->image) }}"
+                    src="{{ Storage::url($student->image)}}"
                     alt="{{ $student->name }}"
                     class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=face';"
