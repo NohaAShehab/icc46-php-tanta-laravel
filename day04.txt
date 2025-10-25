@@ -25,3 +25,11 @@ php artisan make:middleware ValiDMinThreeCharString
 
 using middleware inside the controller
 https://laravel.com/docs/12.x/controllers#controller-middleware
+
+
+/// using laravel breeze
+
+
+
+// when I create new student, course ==> created by --> based on current logged in user ??
+add migration file

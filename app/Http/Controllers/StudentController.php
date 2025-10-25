@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\Course;
@@ -21,17 +22,8 @@ class StudentController extends Controller
     ];
 
     function index(){
-        /**
-         * using query builder return array of objects --> so you need to changes views to deal with student
-         * as object not an array
-         * $students = DB::table('students')->get();  # return with array of std objects
-        */
 
-        // method2 --> get data using Model ??
         $students = Student::all(); # select * from students;
-        # views can deal with model object either as an array or object ?
-//        dd($students); # array of objects  from type StudentModel  -->
-        # get data from db ?
         return view('students.index', ["students"=> $students]);
     }
     function create(){
@@ -63,7 +55,7 @@ class StudentController extends Controller
         // apply some login on data
         // dd($request->all(), $_POST);
 
-
+//        dd($request->user());
         // save image in server --> external storage
         // I need to check if image is uploaded or not ??
         ## $_FILES
@@ -76,6 +68,9 @@ class StudentController extends Controller
         # create new object form model --> can be used to save new record in db ?
         $request_data = $request->validated(); # return with validated data
         $request_data['image']= $image_name;
+//        $owner_id = $request->user()->id;
+        $owner_id = Auth::id();
+        $request_data['owner_id']= $owner_id;
         $student =Student::create($request_data);
 
 //        return to_route('students.index');

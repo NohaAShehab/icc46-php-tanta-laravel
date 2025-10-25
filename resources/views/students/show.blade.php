@@ -150,8 +150,8 @@
 
                 </div>
                 <div>
-                    <dt class="text-sm font-medium text-gray-500">Address</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{{ $student->address ?? 'Not provided' }}</dd>
+                    <dt class="text-sm font-medium text-gray-500">Created by</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ $student->owner_id ?? 'No owner' }}</dd>
                 </div>
             </dl>
         </div>
