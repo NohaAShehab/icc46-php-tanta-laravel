@@ -14,4 +14,7 @@ class Student extends Model
     function course(){
       return $this->belongsTo(Course::class);
     }
+    function owner(){
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }
