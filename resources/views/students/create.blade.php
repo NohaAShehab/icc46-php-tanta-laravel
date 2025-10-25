@@ -174,7 +174,7 @@
                     id="course_id"
                     class="block w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 @error('gender') border-red-300 @enderror"
                 >
-                    <option value="">Select Course</option>
+                    <option value="null" disabled >Select Course</option>
                     @foreach($courses as $course)
                         <option value="{{$course->id}}"> {{$course->name}}</option>
                     @endforeach

@@ -60,14 +60,8 @@ class StudentController extends Controller
     }
 
     function store(StudentStoreRequest $request ){
-
-//        dd($request->all());
-        // you access the body of the request >? via calling request
-        $name = request('name');
-        $date_of_birth = request('date_of_birth');
-        $email = request('email');
-        $grade = request('grade');
-        $gender = request('gender');
+        // apply some login on data
+        // dd($request->all(), $_POST);
 
 
         // save image in server --> external storage
@@ -80,17 +74,10 @@ class StudentController extends Controller
         }
 
         # create new object form model --> can be used to save new record in db ?
+        $request_data = $request->validated(); # return with validated data
+        $request_data['image']= $image_name;
+        $student =Student::create($request_data);
 
-        $student = new Student();
-        $student->name = $name;
-        $student->email = $email;
-        $student->image = $image_name;
-        $student->date_of_birth = $date_of_birth;
-        $student->grade = $grade;
-        $student->gender = $gender;
-        $student->course_id = request('course_id');
-        # save object to the db ?
-        $student->save();
 //        return to_route('students.index');
         return to_route("students.show", $student->id);
 

@@ -24,7 +24,7 @@ class StudentStoreRequest extends FormRequest
     {
         return [
             //
-            "name"=>"min:2|max:10",
+            "name"=>"required|max:10",
             "email"=>"email|unique:students",
             "grade"=>"required|max:100",
             "course_id"=>'exists:courses,id'

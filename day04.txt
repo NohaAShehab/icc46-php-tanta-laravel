@@ -14,3 +14,14 @@ create class request --> can be used inside the controller
 
 
 create request for student controller
+
+---------->
+MiddleWares by default -->
+user defined --> middleware
+
+define middleware --> added to anyrequest --> max number of chars, min of chars.
+
+php artisan make:middleware ValiDMinThreeCharString
+
+using middleware inside the controller
+https://laravel.com/docs/12.x/controllers#controller-middleware

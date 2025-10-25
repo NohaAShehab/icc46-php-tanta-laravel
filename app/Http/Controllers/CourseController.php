@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CourseController extends Controller
+class CourseController extends Controller implements  HasMiddleware
 {
+    // here you can assign the middlewares you need to the routes
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('validString', only: ['store']),
+        ];
+    }
+//
     /**
      * Display a listing of the resource.
      */
@@ -34,17 +44,13 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
-//        dd($request->url());
+
 
         $request->validate([
             "name" => "required|unique:courses",
             "description" => "min:3"
         ]);
-//        dd($request->all());
         $request_data = $request->all();
-//        unset($request_data["_token"]);
-//        dd($request_data);
         // model provide function create object in one line ??
         # mass assignment --> instead of sending data element by element -->
         # you send it as mass
