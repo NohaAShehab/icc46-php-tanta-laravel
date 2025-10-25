@@ -29,11 +29,13 @@ class CourseController extends Controller
 
 
     /**
+     *
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         //
+//        dd($request->url());
 
         $request->validate([
             "name" => "required|unique:courses",

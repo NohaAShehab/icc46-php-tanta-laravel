@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StudentStoreRequest;
 
 class StudentController extends Controller
 {
@@ -58,22 +59,9 @@ class StudentController extends Controller
         return to_route('students.index');
     }
 
-    function store(){
+    function store(StudentStoreRequest $request ){
 
-        request()->validate(
-            // rules
-            [
-            "name"=>"min:2|max:10",
-            "email"=>"email|unique:students",
-            "grade"=>"max:100"
-        ],
-            // customize error message ?
-            [
-            "name.min"=> "Student name must be at least 2 chars",
-                "email.unique"=> "Student with this email already exist",
-        ]);
-
-
+//        dd($request->all());
         // you access the body of the request >? via calling request
         $name = request('name');
         $date_of_birth = request('date_of_birth');

@@ -81,7 +81,7 @@ Route::get("/test/test", [ITIController::class, "getTest"]);
 use App\Http\Controllers\StudentController;
 # adding names to the url ?
 Route::get("/students", [StudentController::class, "index"])->name("students.index");
-Route::get("/students/create", [StudentController::class, "create"])->name("student.create");
+Route::get("/students/create", [StudentController::class, "create"])->name("students.create");
 Route::get("/students/{id}", [StudentController::class, "show"])
     ->where("id", "[0-9]+")->name("students.show");
 

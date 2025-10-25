@@ -16,11 +16,11 @@
 <!-- Course Details -->
 <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
     <!-- Course Image -->
-    <div class="aspect-w-16 aspect-h-9">
+    <div class="w-full max-h-96 flex justify-center bg-gray-100">
         <img
             src="{{ Storage::url($course->image)}}"
             alt="{{ $course->name }}"
-            class="w-full h-64 object-cover"
+            class="max-w-full max-h-full object-contain"
             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop';"
         >
     </div>
@@ -124,13 +124,35 @@
         <div class="px-6 py-4">
             <div class="space-y-4">
 
-{{--                @dump($course->students)--}}
                 <div>
-                    <dt class="text-sm font-medium text-gray-500">Students in this course</dt>
-                    @foreach($course->students as $std)
-                    <li class="mt-1 text-sm text-gray-900">{{ $std->name }}</li>
-                    @endforeach
-
+                    <dt class="text-sm font-medium text-gray-500 mb-3">Students in this course ({{ $course->students->count() }})</dt>
+                    @if($course->students->count() > 0)
+                        <div class="space-y-2">
+                            @foreach($course->students as $student)
+                                <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <span class="text-sm font-medium text-blue-600">{{ substr($student->name, 0, 1) }}</span>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">{{ $student->name }}</p>
+                                            <p class="text-xs text-gray-500">{{ $student->email ?? 'No email' }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-gray-400">
+                                        ID: {{ $student->id }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="text-center py-4">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                            <p class="mt-2 text-sm text-gray-500">No students enrolled yet</p>
+                        </div>
+                    @endif
                 </div>
 
 

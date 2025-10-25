@@ -1,0 +1,16 @@
+
+# request classes ??
+we need to separate the request validation operations in different files
+to keep the controller cleaned
+
+
+php artisan make:request RequestName --> create folder inside http requests ,
+create class request --> can be used inside the controller
+
+
+
+=============================================================================
+
+
+
+create request for student controller
