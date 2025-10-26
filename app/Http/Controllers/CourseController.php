@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller implements  HasMiddleware
 {
@@ -15,6 +16,7 @@ class CourseController extends Controller implements  HasMiddleware
     {
         return [
             new Middleware('validString', only: ['store']),
+            new Middleware('auth', only: ['update', 'destroy', "store"]),
         ];
     }
 //
@@ -51,13 +53,9 @@ class CourseController extends Controller implements  HasMiddleware
             "description" => "min:3"
         ]);
         $request_data = $request->all();
-        // model provide function create object in one line ??
-        # mass assignment --> instead of sending data element by element -->
-        # you send it as mass
         $request_data['image']= $this->uploadImage($request);
+        $request_data["created_by"]= Auth::id();
         $course = Course::create($request_data);
-        # the only issue is uploading image ??
-
         return to_route("courses.show", $course->id);
     }
 
@@ -75,7 +73,7 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function edit(Course $course)
     {
-        //
+        return view("courses.edit", compact("course"));
     }
 
     /**
@@ -83,7 +81,29 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $request->validate([
+            "name" => "required|unique:courses,name," . $course->id,
+            "description" => "min:3"
+        ]);
+
+        $request_data = $request->all();
+        
+        // Handle image upload if new image is provided
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($course->image) {
+                $this->deleteImage($course->image);
+            }
+            $request_data['image'] = $this->uploadImage($request);
+        } else {
+            // Keep existing image if no new image uploaded
+            $request_data['image'] = $course->image;
+        }
+
+        $course->update($request_data);
+        
+        return to_route("courses.show", $course->id)
+            ->with('success', 'Course updated successfully!');
     }
 
     /**

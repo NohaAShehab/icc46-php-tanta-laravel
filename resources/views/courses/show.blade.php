@@ -64,8 +64,8 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-500">Duration</p>
-                        <p class="text-lg font-semibold text-gray-900">Self-paced</p>
+                        <p class="text-sm font-medium text-gray-500">Created by </p>
+                        <p class="text-lg font-semibold text-gray-900">{{$course->creator?  $course->creator->name : "Anonymous"}}</p>
                     </div>
                 </div>
             </div>

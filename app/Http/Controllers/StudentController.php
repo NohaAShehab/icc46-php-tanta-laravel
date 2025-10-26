@@ -9,18 +9,11 @@ use App\Models\Student;
 use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\StudentUpdateRequest;
 
 class StudentController extends Controller
 {
     //
-    private $students = [
-        ["id"=>1, "name"=> "Ahmed", "age"=> 22, "image"=> "ahmed.jpg"],
-        ["id"=>2, "name"=> "Sara", "age"=> 21, "image"=> "sara.jpg"],
-        ["id"=>3, "name"=> "Omar", "age"=> 23, "image"=> "omar.jpg"],
-        ["id"=>4, "name"=> "Mona", "age"=> 20, "image"=> "mona.jpg"],
-        ["id"=>5, "name"=> "Youssef", "age"=> 24, "image"=> "youssef.jpg"]
-    ];
-
     function index(){
 
         $students = Student::all(); # select * from students;
@@ -38,6 +31,29 @@ class StudentController extends Controller
         $course=  Course::find($student->course_id);
 
         return view('students.show', ['student' => $student, 'course'=>$course]);
+    }
+
+    function edit($id){
+        $student = Student::findOrFail($id);
+        $courses = Course::all();
+        return view('students.edit', ['student' => $student, 'courses' => $courses]);
+    }
+
+    function update(StudentUpdateRequest $request, $id){
+        $student = Student::findOrFail($id);
+
+        $request_data = $request->validated();
+        $image=  request('image');
+        // Handle image upload if new image is provided
+        $image_name = null;
+        if($image){
+            $image_name=$this->uploadImage($image);
+        }
+        $request_data["image"]=$image_name;
+        $student->update($request_data);
+
+        return to_route("students.show", $student->id)
+            ->with('success', 'Student updated successfully!');
     }
 
     // delete object --> get object orm will do the task ?

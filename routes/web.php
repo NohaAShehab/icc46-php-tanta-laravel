@@ -64,6 +64,10 @@ Route::get("/students", [StudentController::class, "index"])->name("students.ind
 Route::get("/students/create", [StudentController::class, "create"])->name("students.create");
 Route::get("/students/{id}", [StudentController::class, "show"])
     ->where("id", "[0-9]+")->name("students.show");
+Route::get("/students/{id}/edit", [StudentController::class, "edit"])
+    ->where("id", "[0-9]+")->name("students.edit");
+Route::put("/students/{id}", [StudentController::class, "update"])
+    ->where("id", "[0-9]+")->name("students.update");
 Route::delete('/students/{id}', [StudentController::class, "destroy"])->whereNumber("id")
     ->name("students.destroy");
 
