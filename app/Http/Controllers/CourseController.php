@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class CourseController extends Controller implements  HasMiddleware
 {
@@ -87,7 +89,7 @@ class CourseController extends Controller implements  HasMiddleware
         ]);
 
         $request_data = $request->all();
-        
+
         // Handle image upload if new image is provided
         if ($request->hasFile('image')) {
             // Delete old image if exists
@@ -101,7 +103,7 @@ class CourseController extends Controller implements  HasMiddleware
         }
 
         $course->update($request_data);
-        
+
         return to_route("courses.show", $course->id)
             ->with('success', 'Course updated successfully!');
     }
@@ -111,6 +113,9 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function destroy(Course $course)
     {
+        if (! Gate::allows('destroy-course', $course)) {
+            abort(403);
+        }
         // delete image
         if ($course-> image){
             $this->deleteImage($course->image);

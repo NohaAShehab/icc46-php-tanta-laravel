@@ -1,0 +1,7 @@
+Authorization, who can do what ??
+
+I need to use the gates to authorized , only the owner of course can delete it .
+
+authorized user is authenticated one but the authenticated may not be authorized ??
+
+
