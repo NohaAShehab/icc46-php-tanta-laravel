@@ -5,3 +5,8 @@ I need to use the gates to authorized , only the owner of course can delete it .
 authorized user is authenticated one but the authenticated may not be authorized ??
 
 
+=================
+I need to define rules for the users
+-> admin
+-> manager
+-> client

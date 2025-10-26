@@ -123,7 +123,7 @@
         </div>
         <div class="px-6 py-4">
             <div class="space-y-4">
-
+    @can('show-course-students', $course)
                 <div>
                     <dt class="text-sm font-medium text-gray-500 mb-3">Students in this course ({{ $course->students->count() }})</dt>
                     @if($course->students->count() > 0)
@@ -154,8 +154,9 @@
                         </div>
                     @endif
                 </div>
-
-
+                @else
+                    <h5> Only admin or owner can see the students </h5>
+                @endcan
                 <a href="{{ url('/courses/' . $course->id . '/edit') }}"
                    class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -23,8 +23,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        Gate::define('destroy-course', function(User $user, Course $course) {
-            return  $user->id === $course->created_by;
+        Gate::define('destroy-course', function (User $user, Course $course) {
+            return $user->id === $course->created_by || $user->role == 'admin';
+        });
+
+        Gate::define("show-course-students", function (User $user, Course $course) {
+            return $user->id === $course->created_by || $user->role == 'admin';
         });
 
     }
