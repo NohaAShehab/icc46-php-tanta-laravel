@@ -63,6 +63,7 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function show(Course $course)
     {
+        return $course;
         return view("courses.show", ["course"=>$course]);
     }
 
@@ -137,5 +138,10 @@ class CourseController extends Controller implements  HasMiddleware
 
     private function deleteImage($imageName){
         Storage::disk('public')-> delete($imageName);
+    }
+
+    public function apiIndex(){
+        return Course::all(); // array of course model object
+        // laravel serialization for the data ---> stream ...
     }
 }

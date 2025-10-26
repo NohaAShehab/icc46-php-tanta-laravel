@@ -82,7 +82,7 @@ Route::resource("/courses", CourseController::class);
 
 
 
-
+//Route::get("api/courses", [CourseController::class, "apiIndex"]);
 
 
 
