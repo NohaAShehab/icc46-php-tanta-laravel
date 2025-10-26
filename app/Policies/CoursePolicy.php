@@ -29,15 +29,17 @@ class CoursePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role==='admin';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Course $course): bool
+    public function update(User $user, Course $course): Response
     {
-        return false;
+        return $user->id === $course->creator->id
+            ? Response::allow()
+            : Response::deny('You do not own this Course.');
     }
 
     /**

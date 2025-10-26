@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Course;
 
+use App\Policies\CoursePolicy;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::define("show-course-students", function (User $user, Course $course) {
             return $user->id === $course->created_by || $user->role == 'admin';
         });
+
+        // register policies
+
+        Gate::policy(Course::class, CoursePolicy::class);
+
+
 
     }
 }

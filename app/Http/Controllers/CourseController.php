@@ -9,6 +9,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StoreCourseRequest;
 
 
 class CourseController extends Controller implements  HasMiddleware
@@ -46,14 +47,9 @@ class CourseController extends Controller implements  HasMiddleware
      *
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCourseRequest $request)
     {
 
-
-        $request->validate([
-            "name" => "required|unique:courses",
-            "description" => "min:3"
-        ]);
         $request_data = $request->all();
         $request_data['image']= $this->uploadImage($request);
         $request_data["created_by"]= Auth::id();
@@ -83,6 +79,9 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function update(Request $request, Course $course)
     {
+        Gate::authorize('update', $course);
+
+        // The action is authorized...
         $request->validate([
             "name" => "required|unique:courses,name," . $course->id,
             "description" => "min:3"
