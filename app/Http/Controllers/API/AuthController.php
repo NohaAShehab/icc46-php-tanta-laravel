@@ -25,20 +25,32 @@ class AuthController extends Controller
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
+        // check number of tokens ?
+        $no_of_tokens = $user->tokens()->count();
+        if ($no_of_tokens < 8) {
+            return $user->createToken($request->device_name)->plainTextToken;
 
-        return $user->createToken($request->device_name)->plainTextToken;
-
+        }
+        return response()->json([
+            "message" => "You exceeded the maximum number of logged in devices.",
+        ]);
     }
     function register(Request $request){
         // create the user ?
 
     }
     function logout(Request $request){
-//        return $request->user()->currentAccessToken();
-        $request->user()->currentAccessToken()->delete();
+        if($request->user()->tokenCan('logout')){
+            $request->user()->currentAccessToken()->delete();
+            return response()->json([
+                'message' => 'Logged out'
+            ]);
+        }
         return response()->json([
-            'message' => 'Logged out'
+            "message" => "Invalid token"
         ]);
+//        return $request->user()->currentAccessToken();
+
     }
 
     function logoutFromAll(Request $request){

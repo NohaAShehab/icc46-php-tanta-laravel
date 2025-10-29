@@ -65,5 +65,7 @@ Route::post('/sanctum/token', function (Request $request) {
 
 Route::post("/login", [AuthController::class , 'login']);
 Route::post("/logout", [AuthController::class , 'logout'])->middleware('auth:sanctum');
+Route::post("/logoutFromAll", [AuthController::class , 'logoutFromAll'])->middleware('auth:sanctum');
+
 // define maxi. number of tokens
 // I need logout -->
