@@ -42,7 +42,6 @@ In this lab, you will implement advanced Laravel features including soft deletes
 - Run `php artisan install:api` command
 - Create API routes for products
 - Implement API controllers with proper responses
-- Add API authentication and rate limiting
 
 ---
 
