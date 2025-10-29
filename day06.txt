@@ -10,4 +10,10 @@ api should return with uniform response ?
 
     data: // contain response --> array, object
 }
+=========================
+to authenticate apis --> use package sanctum, passport
 
+composer show --> list installed packages
+
+
+when you use it ==> access the auth middleware ?

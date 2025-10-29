@@ -9,10 +9,22 @@ use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\UserResource;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\Middleware;
 
-class CourseController extends Controller
+class CourseController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        // TODO: Implement middleware() method.
+        return [
+            new Middleware("auth:sanctum", only: ["store"]),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -28,12 +40,14 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCourseRequest $request)
     {
 //        return $request->url();
-        //
+        // get the current logged in user
+        $created_by= Auth::id();
         $request_data = $request->all();
         $request_data['image']= $this->uploadImage($request);
+        $request_data['created_by']= $created_by;
         $course = Course::create($request_data);
 //        return $request->all();
 //        return response()->json($course, 201);
