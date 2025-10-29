@@ -16,9 +16,11 @@
 <!-- Course Details -->
 <div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
     <!-- Course Image -->
+    {{$course->image}}
+    {{ Storage::url($course->image)}}
     <div class="w-full max-h-96 flex justify-center bg-gray-100">
         <img
-            src="{{ Storage::url($course->image)}}"
+            src="{{ $course->image}}"
             alt="{{ $course->name }}"
             class="max-w-full max-h-full object-contain"
             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=400&fit=crop';"

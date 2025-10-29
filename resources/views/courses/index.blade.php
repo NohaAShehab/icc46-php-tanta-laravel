@@ -49,7 +49,9 @@
             <!-- Course Image -->
             <div class="aspect-w-16 aspect-h-9">
                 <img
-                    src="{{ Storage::url($course->image)}}"
+{{--                    src="{{ Storage::url($course->image)}}"--}}
+                    src="{{ $course->image}}"
+
                     alt="{{ $course->name }}"
                     class="w-full h-48 object-cover rounded-t-lg"
                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop';"

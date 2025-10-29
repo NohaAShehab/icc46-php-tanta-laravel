@@ -1,0 +1,13 @@
+
+
+api should return with uniform response ?
+
+=> the data representation --> must be consistant /// contain all the information needed ??
+
+==> using resource in api responses --> return with uniform archit.
+
+{
+
+    data: // contain response --> array, object
+}
+

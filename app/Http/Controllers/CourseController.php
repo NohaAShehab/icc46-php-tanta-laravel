@@ -63,7 +63,7 @@ class CourseController extends Controller implements  HasMiddleware
      */
     public function show(Course $course)
     {
-        return $course;
+//        return $course;
         return view("courses.show", ["course"=>$course]);
     }
 
