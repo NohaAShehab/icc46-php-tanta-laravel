@@ -17,3 +17,21 @@ composer show --> list installed packages
 
 
 when you use it ==> access the auth middleware ?
+
+=========
+why we need to add login with github to ower project
+--> more easier for the users to use ?
+--> no needed to ask the user to fill registeration form ??
+---> ask github to give info about this user
+
+==== use oauth to allow login with github
+
+1- user click login with github?
+    --> redirect to github  -provider page -
+2- user enter their username and password --> (github)
+
+3- github authorize the application
+
+4- generate code --> token , return with userdata and the token to the  client (laravel)
+
+5- client --> use token to access public info of the user -- from github

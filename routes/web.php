@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
@@ -83,8 +84,9 @@ Route::resource("/courses", CourseController::class);
 
 
 //Route::get("api/courses", [CourseController::class, "apiIndex"]);
+Route::get("/login-github", [AuthenticatedSessionController::class, 'loginWithGithub'])->name("login.github");
 
-
+Route::get("/github-callback", [AuthenticatedSessionController::class, 'callbackGithub']);
 
 
 

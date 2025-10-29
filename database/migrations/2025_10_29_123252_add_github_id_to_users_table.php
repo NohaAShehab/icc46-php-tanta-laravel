@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'manager', 'client'])->default('client');
+            //
+            $table->string('github_id')->nullable()->after('email');
+            $table->string('github_token')->nullable()->after('github_id');
+            $table->string('github_refresh_token')->nullable()->after('github_token');
+
         });
     }
 
@@ -22,7 +26,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+            //
+            $table->dropColumn('github_id');
+            $table->dropColumn('github_token');
+            $table->dropColumn('github_refresh_token');
         });
     }
 };
